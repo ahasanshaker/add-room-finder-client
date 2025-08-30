@@ -8,6 +8,7 @@ import MainLayout from './Layouts/MainLayout.jsx';
 import Home from './Component/Home.jsx';
 import AddRoom from './Component/AddRoom.jsx';
 import UpdateRoom from './Component/UpdateRoom.jsx';
+import BrowseAll from './Component/BrowseAll.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
       {
         path: 'updateRoom',
         Component: UpdateRoom
-      }
+      },
+      {
+        path: 'browseAll',
+        Component: BrowseAll
+      },
     ]
   },
 ]);

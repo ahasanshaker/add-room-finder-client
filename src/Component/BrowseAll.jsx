@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const Home = () => {
+const BrowseAll = () => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/rooms/home")
+    fetch("http://localhost:3000/rooms")
       .then(res => res.json())
       .then(data => setRooms(data));
   }, []);
@@ -21,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default BrowseAll;

@@ -34,7 +34,7 @@ const Header = () => {
       </li>
       <li>
         <NavLink
-          to="/"
+          to="/browseAll"
           className={({ isActive }) =>
             `px-4 py-2 rounded-md transition duration-300 ${
               isActive
