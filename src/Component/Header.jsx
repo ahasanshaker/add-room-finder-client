@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router";
+// import { useAuth } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 import { useAuth } from "../provider/AuthProvider";
 
 const Header = () => {
@@ -15,6 +17,22 @@ const Header = () => {
     }
   };
 
+  const handleProtectedLink = (e, path) => {
+    e.preventDefault();
+    if (user) {
+      navigate(path);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Please login first",
+        showConfirmButton: true,
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    }
+  };
+
   const links = (
     <>
       <li>
@@ -22,9 +40,7 @@ const Header = () => {
           to="/"
           className={({ isActive }) =>
             `px-4 py-2 rounded-md transition duration-300 ${
-              isActive
-                ? "bg-primary text-white shadow-md"
-                : "hover:bg-primary hover:text-white"
+              isActive ? "bg-primary text-white shadow-md" : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -32,27 +48,21 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to="/addRoom"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition duration-300 ${
-              isActive
-                ? "bg-primary text-white shadow-md"
-                : "hover:bg-primary hover:text-white"
-            }`
-          }
+        {/* Protected route */}
+        <a
+          href="/addRoom"
+          onClick={(e) => handleProtectedLink(e, "/addRoom")}
+          className="px-4 py-2 rounded-md transition duration-300 hover:bg-primary hover:text-white"
         >
-          Add Room
-        </NavLink>
+          Add To Find Roommate
+        </a>
       </li>
       <li>
         <NavLink
           to="/browseAll"
           className={({ isActive }) =>
             `px-4 py-2 rounded-md transition duration-300 ${
-              isActive
-                ? "bg-primary text-white shadow-md"
-                : "hover:bg-primary hover:text-white"
+              isActive ? "bg-primary text-white shadow-md" : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -64,9 +74,7 @@ const Header = () => {
           to="/myListing"
           className={({ isActive }) =>
             `px-4 py-2 rounded-md transition duration-300 ${
-              isActive
-                ? "bg-primary text-white shadow-md"
-                : "hover:bg-primary hover:text-white"
+              isActive ? "bg-primary text-white shadow-md" : "hover:bg-primary hover:text-white"
             }`
           }
         >
@@ -91,24 +99,14 @@ const Header = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
-              >
+              <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
                 {links}
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl font-bold text-primary">
-              Find RoomMate
-            </a>
+            <NavLink to='/'><a className="btn btn-ghost text-xl font-bold text-primary">Find RoomMate</a></NavLink>
           </div>
 
           {/* Center */}
@@ -117,23 +115,11 @@ const Header = () => {
           </div>
 
           {/* Right */}
-          <div className="navbar-end flex items-center gap-2">
+          <div className="navbar-end">
             {user ? (
-              <>
-                {/* User Image + Name */}
-                <div className="flex items-center gap-2">
-                  <img
-                    src={user.photoURL || user.photoUrl || "https://via.placeholder.com/40"}
-                    alt={user.name || user.displayName}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <span className="font-medium">{user.name || user.displayName}</span>
-                </div>
-
-                <button className="btn btn-error px-5" onClick={handleLogout}>
-                  Logout
-                </button>
-              </>
+              <button className="btn btn-error px-5" onClick={handleLogout}>
+                Logout
+              </button>
             ) : (
               <NavLink to="/login">
                 <button className="btn btn-primary px-5">Login</button>
