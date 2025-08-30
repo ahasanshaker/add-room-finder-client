@@ -1,7 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useAuth } from "../provider/AuthProvider";
+// import { useAuth } from "../Providers/AuthProvider.jsx"; // AuthProvider path check koro
 
 const Header = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login"); // logout er por login page e pathabe
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const links = (
     <>
       <li>
@@ -70,11 +84,7 @@ const Header = () => {
           {/* Left */}
           <div className="navbar-start">
             <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
-              >
+              <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -109,9 +119,15 @@ const Header = () => {
 
           {/* Right */}
           <div className="navbar-end">
-            <NavLink to="/login">
-              <button className="btn btn-primary px-5">Login</button>
-            </NavLink>
+            {user ? (
+              <button className="btn btn-error px-5" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <NavLink to="/login">
+                <button className="btn btn-primary px-5">Login</button>
+              </NavLink>
+            )}
           </div>
         </div>
       </nav>
