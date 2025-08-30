@@ -9,6 +9,8 @@ import Home from './Component/Home.jsx';
 import AddRoom from './Component/AddRoom.jsx';
 import UpdateRoom from './Component/UpdateRoom.jsx';
 import BrowseAll from './Component/BrowseAll.jsx';
+import Login from './Component/Login.jsx';
+import SignUp from './Component/SignUp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'browseAll',
         Component: BrowseAll
+      },
+      {
+        path: 'login',
+        Component: Login
+      },
+      {
+        path: 'signup',
+        Component: SignUp
       },
     ]
   },
