@@ -106,7 +106,7 @@ const Header = () => {
                 {links}
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl font-bold text-primary">Find RoomMate</a>
+            <NavLink to='/'><a className="btn btn-ghost text-xl font-bold text-primary">Find RoomMate</a></NavLink>
           </div>
 
           {/* Center */}

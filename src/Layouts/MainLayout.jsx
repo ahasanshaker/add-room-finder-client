@@ -1,16 +1,26 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import Header from '../Component/Header';
+import Slider from '../Component/Slider';
 
 const MainLayout = () => {
-    return (
-        <div>
-            <Header></Header>
-           <div className='max-w-7xl mx-auto'>
-             <Outlet></Outlet>
-           </div>
-        </div>
-    );
+  const location = useLocation();
+
+  // check if current path is "/"
+  const isHome = location.pathname === "/";
+
+  return (
+    <div>
+      <Header />
+      
+      {/* Slider only on Home */}
+      {isHome && <Slider />}
+
+      <div className="max-w-7xl mx-auto">
+        <Outlet />
+      </div>
+    </div>
+  );
 };
 
 export default MainLayout;
