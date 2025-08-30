@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 
 const AddRoom = () => {
   // Example user data (replace with actual auth data)
@@ -24,7 +25,16 @@ const AddRoom = () => {
     
     .then(res=>res.json())
     .then(data=>{
-        console.log('after adding coffee to db' ,data)
+        if(data.insertedId){
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            form.reset()
+        }
     })
   }
 
@@ -49,7 +59,7 @@ const AddRoom = () => {
           <div className="form-control">
             <label className="label font-semibold">Room Title</label>
             <input 
-              type="text" name='title'
+              type="text" name='title' required
               placeholder="e.g. Spacious 2BHK near Dhanmondi"
               className="input input-bordered w-full"
             />
@@ -59,7 +69,7 @@ const AddRoom = () => {
           <div className="form-control">
             <label className="label font-semibold">Location</label>
             <input
-              type="text" name='location'
+              type="text" name='location' required
               placeholder="Enter your location"
               className="input input-bordered w-full"
             />
@@ -69,7 +79,7 @@ const AddRoom = () => {
           <div className="form-control">
             <label className="label font-semibold">Monthly Rent (৳)</label>
             <input
-              type="number" name='rent'
+              type="number" name='rent' required
               placeholder="Enter rent amount"
               className="input input-bordered w-full"
             />
@@ -77,20 +87,19 @@ const AddRoom = () => {
 
           {/* Room Type */}
           <div className="form-control">
-  <label className="label font-semibold">Room Type</label>
-  <input
-    type="text" name='roomType'
-    placeholder="e.g. Single Room, Shared Room, Apartment"
-    className="input input-bordered w-full"
-  />
-</div>
-
+            <label className="label font-semibold">Room Type</label>
+            <input
+              type="text" name='roomType' required
+              placeholder="e.g. Single Room, Shared Room, Apartment"
+              className="input input-bordered w-full"
+            />
+          </div>
 
           {/* Lifestyle */}
           <div className="form-control md:col-span-2">
             <label className="label font-semibold">Lifestyle (Pets / Smoking / Night Owl...)</label>
             <input
-              type="text" name='lifeStyle'
+              type="text" name='lifeStyle' required
               placeholder="e.g. No pets, Non-smoker, Early riser"
               className="input input-bordered w-full"
             />
@@ -100,7 +109,7 @@ const AddRoom = () => {
           <div className="form-control">
             <label className="label font-semibold">Contact Info</label>
             <input
-              type="tel" name='contact'
+              type="tel" name='contact' required
               placeholder="e.g. 01XXXXXXXXX"
               className="input input-bordered w-full"
             />
@@ -109,14 +118,14 @@ const AddRoom = () => {
           {/* Availability Date */}
           <div className="form-control">
             <label className="label font-semibold">Available From</label>
-            <input type="date" name='available' className="input input-bordered w-full" />
+            <input type="date" name='available' required className="input input-bordered w-full" />
           </div>
 
           {/* Image URL */}
           <div className="form-control md:col-span-2">
             <label className="label font-semibold">Room Image URL</label>
             <input
-              type="text" name='image'
+              type="text" name='image' required
               placeholder="Paste your image URL here"
               className="input input-bordered w-full"
             />
@@ -128,7 +137,7 @@ const AddRoom = () => {
             <input
               type="text"
               value={user.name} name='userName'
-              readOnly
+              readOnly required
               className="input input-bordered w-full bg-gray-100"
             />
           </div>
@@ -139,15 +148,15 @@ const AddRoom = () => {
             <input
               type="email" name='userEmail'
               value={user.email}
-              readOnly
+              readOnly required
               className="input input-bordered w-full bg-gray-100"
             />
           </div>
 
-          {/* Description (all fields er niche) */}
+          {/* Description */}
           <div className="form-control md:col-span-2">
             <label  className="label font-semibold">Description</label>
-            <textarea name='description'
+            <textarea name='description' required
               className="textarea textarea-bordered h-28"
               placeholder="Write details about your room..."
             ></textarea>
