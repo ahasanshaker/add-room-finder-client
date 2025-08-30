@@ -1,41 +1,50 @@
 import React from 'react';
 import Swal from 'sweetalert2';
+import { useAuth } from '../provider/AuthProvider';
+// import { useAuth } from '../provider/AuthProvider'; // AuthProvider path check koro
 
 const AddRoom = () => {
-  // Example user data (replace with actual auth data)
-  const user = {
-    name: "Ahasan Shaker",
-    email: "shaker@example.com"
-  };
-  const handleRoomSubmit=(e)=>{
+  const { user } = useAuth(); // Firebase theke login user
+
+  const handleRoomSubmit = (e) => {
     e.preventDefault();
-    const form= e.target;
+    const form = e.target;
     const formData = new FormData(form);
     const newRoom = Object.fromEntries(formData.entries());
+
     console.log(newRoom);
 
     // Send room data to the db
-    fetch('http://localhost:3000/rooms',{
-        method:"POST",
-        headers:{
-            'content-type':'application/json'
-        },
-        body: JSON.stringify(newRoom)
+    fetch('http://localhost:3000/rooms', {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newRoom)
     })
-    
-    .then(res=>res.json())
-    .then(data=>{
-        if(data.insertedId){
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500
-            });
-            form.reset()
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          form.reset();
         }
-    })
+      })
+  }
+
+  if (!user) {
+    return (
+      <div className="text-center mt-10">
+        <h2 className="text-2xl font-semibold text-red-600">
+          Please login first to add a room.
+        </h2>
+      </div>
+    );
   }
 
   return (
@@ -58,7 +67,7 @@ const AddRoom = () => {
           {/* Room Title */}
           <div className="form-control">
             <label className="label font-semibold">Room Title</label>
-            <input 
+            <input
               type="text" name='title' required
               placeholder="e.g. Spacious 2BHK near Dhanmondi"
               className="input input-bordered w-full"
@@ -136,7 +145,8 @@ const AddRoom = () => {
             <label className="label font-semibold">User Name</label>
             <input
               type="text"
-              value={user.name} name='userName'
+              value={user.displayName || user.name || ""}
+              name='userName'
               readOnly required
               className="input input-bordered w-full bg-gray-100"
             />
@@ -155,7 +165,7 @@ const AddRoom = () => {
 
           {/* Description */}
           <div className="form-control md:col-span-2">
-            <label  className="label font-semibold">Description</label>
+            <label className="label font-semibold">Description</label>
             <textarea name='description' required
               className="textarea textarea-bordered h-28"
               placeholder="Write details about your room..."
@@ -164,7 +174,7 @@ const AddRoom = () => {
 
           {/* Submit Button */}
           <div className="md:col-span-2 text-center mt-4">
-           <input className="btn btn-primary px-10" type="submit" value="Add Room" />
+            <input className="btn btn-primary px-10" type="submit" value="Add Room" />
           </div>
         </form>
       </div>
