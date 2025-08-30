@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router';
 import Header from '../Component/Header';
 import Slider from '../Component/Slider';
+import Footer from '../Component/Footer';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -18,7 +19,9 @@ const MainLayout = () => {
 
       <div className="max-w-7xl mx-auto">
         <Outlet />
+       
       </div>
+       <Footer></Footer>
     </div>
   );
 };
