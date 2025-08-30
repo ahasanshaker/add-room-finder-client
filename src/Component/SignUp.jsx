@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-// import { useAuth } from '../Providers/AuthProvider.jsx';
 import Swal from 'sweetalert2';
 import { useAuth } from '../provider/AuthProvider';
+import { FcGoogle } from 'react-icons/fc';
+// import { FcGoogle } from 'react-icons/fc'; // Google icon import
 
 const SignUp = () => {
-  const { signUp } = useAuth();
+  const { signUp, googleSignIn } = useAuth();
   const [formData, setFormData] = useState({ name: '', email: '', password: '', photoURL: '' });
   const navigate = useNavigate();
 
@@ -24,6 +25,16 @@ const SignUp = () => {
       await signUp(name, email, password, photoURL);
       Swal.fire('Success!', 'Account created successfully!', 'success');
       setFormData({ name: '', email: '', password: '', photoURL: '' });
+      navigate('/');
+    } catch (error) {
+      Swal.fire('Error', error.message, 'error');
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      await googleSignIn();
+      Swal.fire('Success!', 'Signed in with Google!', 'success');
       navigate('/');
     } catch (error) {
       Swal.fire('Error', error.message, 'error');
@@ -63,6 +74,16 @@ const SignUp = () => {
               Sign Up
             </button>
           </form>
+
+          <div className="divider">OR</div>
+
+          <button
+            onClick={handleGoogleSignUp}
+            className="btn btn-outline w-full flex justify-center items-center gap-2"
+          >
+            <FcGoogle className="w-6 h-6" />
+            Sign up with Google
+          </button>
         </div>
       </div>
     </div>
