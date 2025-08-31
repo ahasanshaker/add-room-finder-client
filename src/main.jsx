@@ -12,6 +12,7 @@ import Login from './Component/Login.jsx';
 import SignUp from './Component/SignUp.jsx';
 import { AuthProvider } from './provider/AuthProvider.jsx';
 import MyListing from './Component/MyListing.jsx';
+import RoomDetails from './Component/RoomDetails.jsx';
 
 // import { AuthProvider } from './Providers/AuthProvider.jsx'; // <-- import
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: 'login', Component: Login },
       { path: 'signup', Component: SignUp },
       { path: 'myListing', Component: MyListing },
+       { path: "room/:id", Component: RoomDetails },
      
     ]
   },
