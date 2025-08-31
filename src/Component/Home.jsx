@@ -88,7 +88,7 @@ const Home = () => {
                 <div className="card-body">
                   <h2 className="card-title text-xl font-semibold">
                     {room.title}
-                    <div className="badge badge-secondary">{room.roomType}</div>
+                    <div className="badge badge-secondary text-xs md:text-sm truncate max-w-[100px]">{room.roomType}</div>
                   </h2>
                   <p className="text-gray-600 text-sm">{room.description}</p>
                   <div className="mt-3 space-y-1 text-sm">
