@@ -8,7 +8,7 @@ const UpdateRoom = () => {
   const [room, setRoom] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/rooms`)
+    fetch(`https://homefinder-omega.vercel.app/rooms`)
       .then(res => res.json())
       .then(data => {
         const found = data.find(r => r._id === id);
@@ -21,7 +21,7 @@ const UpdateRoom = () => {
     const formData = new FormData(e.target);
     const updatedRoom = Object.fromEntries(formData.entries());
 
-    fetch(`http://localhost:3000/rooms/${id}`, {
+    fetch(`https://homefinder-omega.vercel.app/rooms/${id}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(updatedRoom)

@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     await updateProfile(userCredential.user, { displayName: name, photoURL });
 
     // Save user to MongoDB
-    await fetch('http://localhost:3000/users', {
+    await fetch('https://homefinder-omega.vercel.app/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, photoURL }),
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-    const response = await fetch(`http://localhost:3000/users?email=${email}`);
+    const response = await fetch(`https://homefinder-omega.vercel.app/users?email=${email}`);
     const data = await response.json();
     setUser(data[0]);
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Save/update user in MongoDB
-    await fetch('http://localhost:3000/users', {
+    await fetch('https://homefinder-omega.vercel.app/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const response = await fetch(`http://localhost:3000/users?email=${currentUser.email}`);
+        const response = await fetch(`https://homefinder-omega.vercel.app/users?email=${currentUser.email}`);
         const data = await response.json();
         setUser(data[0]);
       } else {

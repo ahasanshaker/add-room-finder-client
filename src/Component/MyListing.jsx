@@ -11,7 +11,7 @@ const MyListing = () => {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:3000/rooms/user?email=${user.email}`)
+    fetch(`https://homefinder-omega.vercel.app/rooms/user?email=${user.email}`)
       .then(res => res.json())
       .then(data => setRooms(data));
   }, [user]);
@@ -37,7 +37,7 @@ const MyListing = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/rooms/${id}`, {
+        fetch(`https://homefinder-omega.vercel.app/rooms/${id}`, {
           method: 'DELETE'
         })
         .then(res => res.json())

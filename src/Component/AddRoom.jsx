@@ -15,7 +15,7 @@ const AddRoom = () => {
     console.log(newRoom);
 
     // Send room data to the db
-    fetch('http://localhost:3000/rooms', {
+    fetch('https://homefinder-omega.vercel.app/rooms', {
       method: "POST",
       headers: {
         'content-type': 'application/json'

@@ -5,7 +5,7 @@ const BrowseAll = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/rooms")
+    fetch("https://homefinder-omega.vercel.app/rooms")
       .then(res => res.json())
       .then(data => setRooms(data));
   }, []);

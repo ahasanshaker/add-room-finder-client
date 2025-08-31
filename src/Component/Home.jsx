@@ -8,9 +8,11 @@ const Home = () => {
   const [filteredRooms, setFilteredRooms] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/rooms/home")
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      "https://homefinder-omega.vercel.app/rooms/home"
+    )
+      .then((res) => res.json())
+      .then((data) => {
         setRooms(data);
         setFilteredRooms(data);
       });
@@ -20,7 +22,7 @@ const Home = () => {
     if (!search) {
       setFilteredRooms(rooms);
     } else {
-      const filtered = rooms.filter(room =>
+      const filtered = rooms.filter((room) =>
         room.location.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredRooms(filtered);
@@ -73,7 +75,7 @@ const Home = () => {
                 transition={{
                   duration: 0.8,
                   delay: index * 0.4,
-                  ease: "easeOut"
+                  ease: "easeOut",
                 }}
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition rounded-2xl"
@@ -88,20 +90,34 @@ const Home = () => {
                 <div className="card-body">
                   <h2 className="card-title text-xl font-semibold">
                     {room.title}
-                    <div className="badge badge-secondary text-xs md:text-sm truncate max-w-[100px]">{room.roomType}</div>
+                    <div className="badge badge-secondary text-xs md:text-sm truncate max-w-[100px]">
+                      {room.roomType}
+                    </div>
                   </h2>
                   <p className="text-gray-600 text-sm">{room.description}</p>
                   <div className="mt-3 space-y-1 text-sm">
-                    <p><span className="font-semibold">📍 Location:</span> {room.location}</p>
-                    <p><span className="font-semibold">💰 Rent:</span> {room.rent} BDT</p>
-                    <p><span className="font-semibold">📞 Contact:</span> {room.contact}</p>
+                    <p>
+                      <span className="font-semibold">📍 Location:</span>{" "}
+                      {room.location}
+                    </p>
+                    <p>
+                      <span className="font-semibold">💰 Rent:</span>{" "}
+                      {room.rent} BDT
+                    </p>
+                    <p>
+                      <span className="font-semibold">📞 Contact:</span>{" "}
+                      {room.contact}
+                    </p>
                   </div>
                   <div className="card-actions justify-between items-center mt-4">
                     <div>
                       <p className="text-sm text-gray-500">Posted by</p>
                       <p className="font-medium">{room.userName}</p>
                     </div>
-                    <Link to={`/room/${room._id}`} className="btn btn-primary btn-sm">
+                    <Link
+                      to={`/room/${room._id}`}
+                      className="btn btn-primary btn-sm"
+                    >
                       View Details
                     </Link>
                   </div>
@@ -117,39 +133,65 @@ const Home = () => {
       </div>
 
       {/* ===================== New Section 1: Featured Locations ===================== */}
-   <section className="mt-20">
-  <h2 className="text-3xl font-bold text-center mb-10">🌍 Featured Locations in Dhaka</h2>
-  <div className="grid md:grid-cols-3 gap-6">
-    {[
-      { title: "Dhanmondi", desc: "Budget-friendly rooms near Dhanmondi.", color: "from-blue-500 to-indigo-500" },
-      { title: "Mirpur", desc: "Affordable shared apartments in Mirpur.", color: "from-green-500 to-emerald-500" },
-      { title: "Banani", desc: "Comfortable single rooms in Banani.", color: "from-purple-500 to-pink-500" },
-    ].map((loc, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: i * 0.3, duration: 0.8 }}
-        className={`p-6 bg-gradient-to-r ${loc.color} text-white rounded-2xl shadow-lg hover:scale-105 transition`}
-      >
-        <h3 className="text-xl font-semibold mb-2">{loc.title}</h3>
-        <p>{loc.desc}</p>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-
+      <section className="mt-20">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          🌍 Featured Locations in Dhaka
+        </h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              title: "Dhanmondi",
+              desc: "Budget-friendly rooms near Dhanmondi.",
+              color: "from-blue-500 to-indigo-500",
+            },
+            {
+              title: "Mirpur",
+              desc: "Affordable shared apartments in Mirpur.",
+              color: "from-green-500 to-emerald-500",
+            },
+            {
+              title: "Banani",
+              desc: "Comfortable single rooms in Banani.",
+              color: "from-purple-500 to-pink-500",
+            },
+          ].map((loc, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.3, duration: 0.8 }}
+              className={`p-6 bg-gradient-to-r ${loc.color} text-white rounded-2xl shadow-lg hover:scale-105 transition`}
+            >
+              <h3 className="text-xl font-semibold mb-2">{loc.title}</h3>
+              <p>{loc.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* ===================== New Section 2: Why Choose Us ===================== */}
       <section className="mt-20 mb-16">
-        <h2 className="text-3xl font-bold text-center mb-10">💡 Why Choose Us?</h2>
+        <h2 className="text-3xl font-bold text-center mb-10">
+          💡 Why Choose Us?
+        </h2>
         <div className="grid md:grid-cols-3 gap-6 text-center">
           {[
-            { icon: "💸", title: "Affordable Rent", desc: "Best price guarantee with no hidden charges." },
-            { icon: "🔒", title: "Verified Rooms", desc: "Every listing is checked & verified for your safety." },
-            { icon: "⚡", title: "Easy Booking", desc: "Quick & hassle-free booking process online." },
+            {
+              icon: "💸",
+              title: "Affordable Rent",
+              desc: "Best price guarantee with no hidden charges.",
+            },
+            {
+              icon: "🔒",
+              title: "Verified Rooms",
+              desc: "Every listing is checked & verified for your safety.",
+            },
+            {
+              icon: "⚡",
+              title: "Easy Booking",
+              desc: "Quick & hassle-free booking process online.",
+            },
           ].map((item, i) => (
             <motion.div
               key={i}

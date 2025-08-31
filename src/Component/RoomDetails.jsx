@@ -26,7 +26,7 @@ const RoomDetails = () => {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:3000/rooms/${id}`)
+    fetch(`https://homefinder-omega.vercel.app/rooms/${id}`)
       .then(res => res.json())
       .then(data => {
         setRoom(data);  
@@ -46,7 +46,7 @@ const RoomDetails = () => {
     }
     if (liked) return;
 
-    fetch(`http://localhost:3000/rooms/${id}/like`, {
+    fetch(`https://homefinder-omega.vercel.app/rooms/${id}/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userEmail: user.email })
