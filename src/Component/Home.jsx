@@ -115,6 +115,55 @@ const Home = () => {
           </p>
         )}
       </div>
+
+      {/* ===================== New Section 1: Featured Locations ===================== */}
+      <section className="mt-20">
+        <h2 className="text-3xl font-bold text-center mb-10">🌍 Featured Locations</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { title: "Dhaka City", desc: "Find budget-friendly rooms near Dhanmondi, Mirpur & Gulshan.", color: "from-blue-500 to-indigo-500" },
+            { title: "Chattogram", desc: "Perfect shared apartments for students & professionals.", color: "from-green-500 to-emerald-500" },
+            { title: "Sylhet", desc: "Peaceful environment with affordable single rooms.", color: "from-purple-500 to-pink-500" },
+          ].map((loc, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.3, duration: 0.8 }}
+              className={`p-6 bg-gradient-to-r ${loc.color} text-white rounded-2xl shadow-lg hover:scale-105 transition`}
+            >
+              <h3 className="text-xl font-semibold mb-2">{loc.title}</h3>
+              <p>{loc.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===================== New Section 2: Why Choose Us ===================== */}
+      <section className="mt-20 mb-16">
+        <h2 className="text-3xl font-bold text-center mb-10">💡 Why Choose Us?</h2>
+        <div className="grid md:grid-cols-3 gap-6 text-center">
+          {[
+            { icon: "💸", title: "Affordable Rent", desc: "Best price guarantee with no hidden charges." },
+            { icon: "🔒", title: "Verified Rooms", desc: "Every listing is checked & verified for your safety." },
+            { icon: "⚡", title: "Easy Booking", desc: "Quick & hassle-free booking process online." },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.3, duration: 0.6 }}
+              className="p-6 bg-base-200 rounded-2xl shadow-md hover:shadow-xl transition"
+            >
+              <span className="text-5xl">{item.icon}</span>
+              <h3 className="text-xl font-semibold mt-4">{item.title}</h3>
+              <p className="mt-2">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
