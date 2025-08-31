@@ -117,28 +117,30 @@ const Home = () => {
       </div>
 
       {/* ===================== New Section 1: Featured Locations ===================== */}
-      <section className="mt-20">
-        <h2 className="text-3xl font-bold text-center mb-10">🌍 Featured Locations</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { title: "Dhaka City", desc: "Find budget-friendly rooms near Dhanmondi, Mirpur & Gulshan.", color: "from-blue-500 to-indigo-500" },
-            { title: "Chattogram", desc: "Perfect shared apartments for students & professionals.", color: "from-green-500 to-emerald-500" },
-            { title: "Sylhet", desc: "Peaceful environment with affordable single rooms.", color: "from-purple-500 to-pink-500" },
-          ].map((loc, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.3, duration: 0.8 }}
-              className={`p-6 bg-gradient-to-r ${loc.color} text-white rounded-2xl shadow-lg hover:scale-105 transition`}
-            >
-              <h3 className="text-xl font-semibold mb-2">{loc.title}</h3>
-              <p>{loc.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+   <section className="mt-20">
+  <h2 className="text-3xl font-bold text-center mb-10">🌍 Featured Locations in Dhaka</h2>
+  <div className="grid md:grid-cols-3 gap-6">
+    {[
+      { title: "Dhanmondi", desc: "Budget-friendly rooms near Dhanmondi.", color: "from-blue-500 to-indigo-500" },
+      { title: "Mirpur", desc: "Affordable shared apartments in Mirpur.", color: "from-green-500 to-emerald-500" },
+      { title: "Banani", desc: "Comfortable single rooms in Banani.", color: "from-purple-500 to-pink-500" },
+    ].map((loc, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.3, duration: 0.8 }}
+        className={`p-6 bg-gradient-to-r ${loc.color} text-white rounded-2xl shadow-lg hover:scale-105 transition`}
+      >
+        <h3 className="text-xl font-semibold mb-2">{loc.title}</h3>
+        <p>{loc.desc}</p>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
+
 
       {/* ===================== New Section 2: Why Choose Us ===================== */}
       <section className="mt-20 mb-16">
