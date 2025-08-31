@@ -29,7 +29,7 @@ const RoomDetails = () => {
     fetch(`http://localhost:3000/rooms/${id}`)
       .then(res => res.json())
       .then(data => {
-        setRoom(data);
+        setRoom(data);  
         setLikeCount(data.likes || 0);
       })
       .catch(err => {
